@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+
+  embedded:
+    build:
+      context: ../
+      dockerfile: ./build/cochdb/embed.dockerfile
+      args:
+        GO_VER: 1.18.3
+        OS_VER: ubuntu:18.04
+    image: ${COCHDB_EMBED_IMAGE:-go-db/cochdbcli:current}

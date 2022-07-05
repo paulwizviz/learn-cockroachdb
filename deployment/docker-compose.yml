@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+
+  roach1:
+    image: cockroachdb/cockroach:v22.1.2
+    container_name: roach1
+    command: start --insecure --join=roach1,roach2,roach3
+    ports:
+      - 26257:26257 # port to enable client to connect to it
+      - 8080:8080 # port to Cockroach console
+    networks:
+      - local
+
+  roach2:
+    image: cockroachdb/cockroach:v22.1.2
+    container_name: roach2
+    command: start --insecure --join=roach1,roach2,roach3
+    networks:
+      - local
+
+  roach3:
+    image: cockroachdb/cockroach:v22.1.2
+    container_name: roach3
+    command: start --insecure --join=roach1,roach2,roach3
+    networks:
+      - local
+
+networks:
+  local:
+    name: $NETWORK

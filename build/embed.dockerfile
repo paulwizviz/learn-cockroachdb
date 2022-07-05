@@ -1,0 +1,6 @@
+ARG OS_VER
+ARG GO_VER
+
+FROM ${OS_VER}
+
+
